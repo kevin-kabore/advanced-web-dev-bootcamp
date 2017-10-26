@@ -1,0 +1,36 @@
+.box {
+  background-color: #9b59b6;
+  height: 100px;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+  border-radius: 20px;
+}
+
+/* .animated {
+  transition-property: background-color, border-radius;
+  transition-duration: 1s, 1s;
+  transition-delay: 5s, 2s;
+
+}
+
+.box:hover {
+  background-color: #e74c3c;
+  transform: scale(2);
+  transform-origin: top left;
+  border-radius: 50px;
+} */
+
+.animated {
+  transition: transform 2s ease-in 1s, background-color 0.5s linear;
+  /*   transition-property: transform;
+  transition-duration: 2s;
+  transition-timing-function: ease-in;
+  transition-delay: 1s; */
+}
+.box:hover {
+  transform: translateX(300px);
+  background-color: teal;
+}
