@@ -17,15 +17,18 @@
 }
 .box-2 {
   background: #fa6800;
+  font-size: 150px;
 }
 .box-3 {
   background: #f0a30a;
 }
 .box-4 {
   background: #e3c800;
+  font-size: 20px;
 }
 .box-5 {
   background: #a4c400;
+  font-size: 80px;
 }
 .box-6 {
   background: #60a917;
@@ -35,6 +38,7 @@
 }
 .box-8 {
   background: #1ba1e2;
+  font-size: 125px;
 }
 .box-9 {
   background: #aa00ff;
@@ -45,8 +49,9 @@
 .container {
   display: flex;
   border: 10px solid black;
-  flex-direction: column-reverse;
-  flex-wrap: wrap-reverse;
+  height: 600px;
+  align-items: flex-start;
   justify-content: center;
-  height: 300px;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
