@@ -81,3 +81,17 @@ function findIndex(arr, callback) {
 var obj = { firstname: 'Kevin', lastName: 'Kabore' }; // Creates memory in heap
 // New data is not created, only a copy of the reference
 var referenceCopy = obj; // just a copy
+
+//////////////////////////////
+//////////////////////////////
+// The Queue
+//////////////////////////////
+//////////////////////////////
+
+// What is the Queue?
+// - An ordered list of functions waiting to be placed on the stack
+// - functions in the queue are processed on a first in, first out basis FIFO
+
+// What is the event loop?
+// - Functionality in the javascript runtime that checks the queue when the stack is emptu
+// - If the stack is empty, the front of the queue is placed in the stack
