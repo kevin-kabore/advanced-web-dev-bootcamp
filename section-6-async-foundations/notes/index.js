@@ -43,3 +43,41 @@ function findIndex(arr, callback) {
   }
   return -1;
 }
+
+//////////////////////////////
+//////////////////////////////
+// The Stack and the Heap
+//////////////////////////////
+//////////////////////////////
+
+// What is the Stack?
+// - An ordered data structure
+// - Keeps track of funtion invocations
+// - Part of the javascript runtime (you don't access it directly)
+
+// Stack definition
+// - An ordered set of stack frames
+// - Most recently invoked function is on the top of the stack
+// - The bottom of the stack is the first function invoked
+// - The bottom of the stack is the first function invoked
+// - The stack is processed from top to bottom
+
+// How your code changes the Stack
+// - WHenever you invoke a function, the details of the invocation are saved
+// to the top of  the Stack (pushed to the top)
+// - Whenever a function returns, the information about the invocation is
+// taken off the top of the stack (popped off the stack)
+
+// Stack frame contents
+// - The function that was invoked
+// - the parameters that were passed to the function
+// - CUrrent line number (VERY IMPORTANT)
+
+// What is a Heap?
+// - An area in memory where your data is stored
+// - Example:
+// The object is created in the heap.
+// obj is a recference to the object.
+var obj = { firstname: 'Kevin', lastName: 'Kabore' }; // Creates memory in heap
+// New data is not created, only a copy of the reference
+var referenceCopy = obj; // just a copy
