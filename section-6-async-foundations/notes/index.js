@@ -95,3 +95,53 @@ var referenceCopy = obj; // just a copy
 // What is the event loop?
 // - Functionality in the javascript runtime that checks the queue when the stack is emptu
 // - If the stack is empty, the front of the queue is placed in the stack
+
+//////////////////////////////
+//////////////////////////////
+// Promises
+//////////////////////////////
+//////////////////////////////
+
+// What is a promise?
+// - A promise is an object that represents a task that will be completed in the future
+// example
+var p1 = new Promise(function(resolve, reject) {
+  resolve([1, 2, 3, 4]);
+});
+
+p1
+  .then(function(data) {
+    console.log('Promise p1 resolved with data: ', data);
+  })
+  .catch(function(data) {
+    console.log('Promise p1 was rejected with data: ', data);
+  });
+
+var p2 = new Promise(function(resolve, reject) {
+  var num = Math.random();
+  if (num < 0.5) {
+    resolve(num);
+  } else {
+    reject(num);
+  }
+});
+
+p2
+  .then(function(result) {
+    console.log('Success: ', reuslt);
+  })
+  .catch(function(error) {
+    console.log('Error: ', error);
+  });
+
+// promise with setTimeout
+var promise = new Promise(function(resolve, reject) {
+  setTimeout(function() {
+    var randomInt = Mathh.floor(Math.random() * 10);
+    resolve(randomInt);
+  }, 4000);
+});
+
+promise.then(function(data) {
+  console.log('Random int passed to resole: ', data);
+});
