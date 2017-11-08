@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container #catImg {
+  border: 1px solid;
+}
+
+.container button {
+  margin-top: 20px;
+}
