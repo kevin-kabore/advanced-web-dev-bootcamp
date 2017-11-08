@@ -8,16 +8,15 @@ btn.addEventListener('click', function() {
     if (XHR.readyState == 4 && XHR.status == 200) {
       var currency = document.querySelector('input[name=currency]:checked')
         .value;
-      console.log(currency);
       if (!currency) {
         currency = 'USD';
       }
       var res = JSON.parse(XHR.responseText);
       var price = res.bpi[currency].rate;
-      console.log(price);
       span.innerHTML = price + ' ' + currency;
     }
   };
-  XHR.open('GET', 'https://api.coindesk.com/v1/bpi/currentprice.json');
+  var url = 'https://api.coindesk.com/v1/bpi/currentprice.json';
+  XHR.open('GET', url);
   XHR.send();
 });
