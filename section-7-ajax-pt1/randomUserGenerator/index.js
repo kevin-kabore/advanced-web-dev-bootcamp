@@ -9,17 +9,12 @@ btn.addEventListener('click', function() {
   var url = 'https://randomuser.me/api/';
   fetch(url)
     .then(handleErrors)
-    .then(function(res) {
-      return res.json();
-    })
-    .then(function(data) {
-      fullname.innerHTML = getFullName(data);
-      username.innerHTML = getUserName(data);
-      email.innerHTML = getEmail(data);
-      city.innerHTML = getCity(data);
-      avatar.src = getImage(data);
-    });
+    .then(parseJSON)
+    .then(updateProfile)
+    .catch(printError);
 });
+
+// FETCH functions
 function handleErrors(req) {
   if (!req.ok) {
     throw Error(req.status);
@@ -27,9 +22,27 @@ function handleErrors(req) {
   return req;
 }
 
+function parseJSON(res) {
+  return res.json();
+}
+
+function updateProfile(data) {
+  fullname.innerHTML = getFullName(data);
+  username.innerHTML = getUserName(data);
+  email.innerHTML = getEmail(data);
+  city.innerHTML = getCity(data);
+  avatar.src = getImage(data);
+}
+
+function printError(err) {
+  alert(err);
+}
+
+// JSON parsing functions
 function capitalizeFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
 function getFullName(data) {
   var firstName = capitalizeFirst(data.results[0].name.first);
   var lastName = capitalizeFirst(data.results[0].name.last);
