@@ -8,12 +8,11 @@ var avatar = document.querySelector('#avatar');
 btn.addEventListener('click', function() {
   var url = 'https://randomuser.me/api/';
   fetch(url)
+    .then(handleErrors)
     .then(function(res) {
       return res.json();
     })
     .then(function(data) {
-      // console.log(data.results[0])
-
       fullname.innerHTML = getFullName(data);
       username.innerHTML = getUserName(data);
       email.innerHTML = getEmail(data);
@@ -21,6 +20,12 @@ btn.addEventListener('click', function() {
       avatar.src = getImage(data);
     });
 });
+function handleErrors(req) {
+  if (!req.ok) {
+    throw Error(req.status);
+  }
+  return req;
+}
 
 function capitalizeFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
