@@ -1,9 +1,9 @@
 var btn = document.querySelector('#btn');
-var fullname = document.querySelector('#fullname');
-var username = document.querySelector('#username');
-var email = document.querySelector('#email');
-var city = document.querySelector('#city');
-var avatar = document.querySelector('#avatar');
+var fullnameDisp = document.querySelector('#fullname');
+var usernameDisp = document.querySelector('#username');
+var emailDisp = document.querySelector('#email');
+var cityDisp = document.querySelector('#city');
+var avatarDisp = document.querySelector('#avatar');
 
 btn.addEventListener('click', function() {
   var url = 'https://randomuser.me/api/';
@@ -23,49 +23,51 @@ function handleErrors(req) {
 }
 
 function parseJSON(res) {
-  return res.json();
+  return res.json().then(function(data) {
+    return data.results[0];
+  });
 }
 
 function updateProfile(data) {
-  fullname.innerHTML = getFullName(data);
-  username.innerHTML = getUserName(data);
-  email.innerHTML = getEmail(data);
-  city.innerHTML = getCity(data);
-  avatar.src = getImage(data);
+  fullnameDisp.innerHTML = getFullName(data);
+  usernameDisp.innerHTML = getUserName(data);
+  emailDisp.innerHTML = getEmail(data);
+  cityDisp.innerHTML = getCity(data);
+  avatarDisp.src = getImage(data);
 }
 
 function printError(err) {
-  alert(err);
+  console.log('ERROR: ' + err);
 }
 
-// JSON parsing functions
+// JSON api res parsing functions
 function capitalizeFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function getFullName(data) {
-  var firstName = capitalizeFirst(data.results[0].name.first);
-  var lastName = capitalizeFirst(data.results[0].name.last);
+  var firstName = capitalizeFirst(data.name.first);
+  var lastName = capitalizeFirst(data.name.last);
   var fullName = firstName + ' ' + lastName;
   return fullName;
 }
 
 function getUserName(data) {
-  var userName = data.results[0].login.username;
+  var userName = data.login.username;
   return userName;
 }
 
 function getEmail(data) {
-  var email = data.results[0].email;
+  var email = data.email;
   return email;
 }
 
 function getCity(data) {
-  var city = capitalizeFirst(data.results[0].location.city);
+  var city = capitalizeFirst(data.location.city);
   return city;
 }
 
 function getImage(data) {
-  var img = data.results[0].picture.medium;
+  var img = data.picture.medium;
   return img;
 }
