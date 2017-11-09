@@ -60,8 +60,7 @@ Examples:
 function showFirstAndLast(arr) {
   var newArr = [];
   arr.forEach(function(val) {
-    var firstLast = val.charAt(0) + val.charAt(val.length - 1);
-    newArr.push(firstLast);
+    newArr.push(val[0] + val[val.length - 1]);
   });
   return newArr;
 }
@@ -76,13 +75,10 @@ Examples:
 
 */
 function addKeyAndValue(arr, key, value) {
-  var newArr = [];
-  arr.forEach(function(obj) {
-    var newObj = { name: obj.name };
-    newObj[key] = value;
-    newArr.push(newObj);
+  arr.forEach(function(val) {
+    val[key] = value;
   });
-  return newArr;
+  return arr;
 }
 
 /*
@@ -96,9 +92,9 @@ Examples:
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
 function vowelCount(str) {
+  str = str.toLowerCase().split('');
   var vowels = ['a', 'e', 'i', 'o', 'u'];
   var obj = {};
-  str = str.toLowerCase().split('');
   str.forEach(function(letter) {
     if (vowels.includes(letter)) {
       if (obj.hasOwnProperty(letter)) {
