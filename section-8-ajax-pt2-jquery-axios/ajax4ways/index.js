@@ -13,7 +13,6 @@ xhrBtn.addEventListener('click', function() {
       quoteDisp.innerText = res;
     }
   };
-  var url = 'https://ron-swanson-quotes.herokuapp.com/v2/quotes';
   XHR.open('GET', url);
   XHR.send();
 });
@@ -35,6 +34,16 @@ fetchBtn.addEventListener('click', function() {
 $('#jquery').click(function() {
   $.getJSON(url).done(function(data) {
     $('#quote').text(data);
-    console.log($('#quote').text());
   });
 });
+
+// Axios
+var axiosBtn = document.querySelector('#axios');
+
+axiosBtn.addEventListener('click', getQuote);
+
+function getQuote() {
+  axios.get(url).then(function(res) {
+    quoteDisp.innerText = res.data;
+  });
+}
