@@ -19,7 +19,6 @@ xhrBtn.addEventListener('click', function() {
 });
 
 // FETCH
-
 var fetchBtn = document.querySelector('#fetch');
 
 fetchBtn.addEventListener('click', function() {
@@ -30,4 +29,12 @@ fetchBtn.addEventListener('click', function() {
     .then(function(data) {
       quoteDisp.innerText = data;
     });
+});
+
+// jQuery
+$('#jquery').click(function() {
+  $.getJSON(url).done(function(data) {
+    $('#quote').text(data);
+    console.log($('#quote').text());
+  });
 });
