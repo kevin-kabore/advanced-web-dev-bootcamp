@@ -40,3 +40,16 @@ function filter(arr, callback){
   }
   return newArr;
 }
+
+// filter array to return only four letter names
+function onlyFourLetterWords(arr){
+  return arr.filter(function(value){
+    return value.length === 4;
+  })
+}
+
+function divisibleByThree(arr){
+  return arr.filter(function(val){
+    return val % 3 === 0;
+  })
+}
