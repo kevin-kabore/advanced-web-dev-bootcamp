@@ -9,14 +9,12 @@ Examples:
 */
 
 function specialMultiply(a, b) {
-  if (arguments.length === 2) {
-    return a * b;
-  } else if (arguments.length === 1) {
-    var firstArg = arguments[0];
-    return function(secondArg) {
-      return firstArg * secondArg;
+  if (arguments.length === 1) {
+    return function(b) {
+      return a * b;
     };
   }
+  return a * b;
 }
 
 /*
@@ -43,19 +41,24 @@ Examples (yours might not be like this, since the answer is random every time):
 */
 
 function guessingGame(amount) {
-  var answer = Math.floor(Math.random() * 10);
+  var answer = Math.floor(Math.random() * 11);
   var guesses = 0;
+  var completed = false;
   return function(guess) {
-    if (guesses === amount) {
-      return 'You are all done playing!';
+    if (!completed) {
+      guess++;
+      if (guess === answer) {
+        completed = true;
+        return 'You got it!';
+      } else if (guess > answer) {
+        return 'Your guess is too high!';
+      } else if (guess < answer) {
+        return 'Your guess is too low!';
+      } else if (guesses === amount) {
+        completed = true;
+        return 'No more guesses the answer was ' + answer;
+      }
     }
-    guesses++;
-    if (guess === answer) {
-      return 'You got it!';
-    } else if (guess > answer) {
-      return 'Your guess is too high!';
-    } else if (guess < answer) {
-      return 'Your guess is too low!';
-    }
+    return 'All done playing!';
   };
 }
