@@ -1,3 +1,22 @@
+////////////////////////////
+// filter implementation
+////////////////////////////
+// 1. creates new array
+// 2. iterates through an array
+// 3. Runs a callback function on each value in the array
+// 4. If the callback function returns true, that value will be added to the array
+// 5. If the callback function returns false, that value will be ignored from the array
+function filter(arr, callback){
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (callback(arr[i], i, array) === true) {
+      newArr.push(arr[i])
+    }
+  }
+  return newArr;
+}
+
+
 // filter
 // 1. creates new array
 // 2. iterates through an array
@@ -23,23 +42,6 @@ instructors.filtr(function(value, index, array){
 })
 // return [{name:'Elie'}, {name:'Matt'}, {name:'Colt'}]
 
-////////////////////////////
-// filter implementation
-////////////////////////////
-// 1. creates new array
-// 2. iterates through an array
-// 3. Runs a callback function on each value in the array
-// 4. If the callback function returns true, that value will be added to the array
-// 5. If the callback function returns false, that value will be ignored from the array
-function filter(arr, callback){
-  var newArr = [];
-  for (var i = 0; i < arr.length; i++) {
-     if (callback(arr[i], i, array) === true) {
-       newArr.push(arr[i])
-     }
-  }
-  return newArr;
-}
 
 // filter array to return only four letter names
 function onlyFourLetterWords(arr){

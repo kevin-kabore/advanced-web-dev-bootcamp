@@ -4,6 +4,7 @@ function forEach(arr, callback) {
     callback(arr[i], i, arr);
   }
 }
+
 // Example
 function halfValues(arr) {
   var newArr = [];

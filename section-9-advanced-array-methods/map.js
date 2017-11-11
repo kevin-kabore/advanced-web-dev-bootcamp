@@ -1,11 +1,3 @@
-// map Example
-// map returns a new arr of same length
-// with val from cb function in new arr
-var arr = [1, 2, 3];
-arr.map(function(val, index, array) {
-  return val * 2;
-}); // [2,4,6]
-
 /////////////////////////
 // map implementation
 /////////////////////////
@@ -23,6 +15,13 @@ function map(array, callback) {
   }
   return newArr;
 }
+// map Example
+// map returns a new arr of same length
+// with val from cb function in new arr
+var arr = [1, 2, 3];
+arr.map(function(val, index, array) {
+  return val * 2;
+}); // [2,4,6]
 
 // map in a function
 function trpleValues(arr) {
