@@ -82,7 +82,9 @@ function extractValue(arr, key) {
 }
 
 /*
-Write a function called vowelCount which accepts a string and returns an object with the keys as the vowel and the values as the number of times the vowel appears in the string. This function should be case insensitive so a lowercase letter and uppercase letter should count
+Write a function called vowelCount which accepts a string and returns an object
+with the keys as the vowel and the values as the number of times the vowel appears
+in the string. This function should be case insensitive so a lowercase letter and uppercase letter should count
 
 Examples:
     vowelCount('Elie') // {e:2,i:1};
