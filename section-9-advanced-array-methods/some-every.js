@@ -56,3 +56,13 @@ arr.every(function(val, index, array) {
   return val < 0;
 });
 // returns true;
+
+function allLowerCase(str) {
+  return str.split('').every(function(val) {
+    return val === val.toLowerCase();
+  });
+}
+
+function allArrays(arr) {
+  return arr.every(Array.isArray);
+}
