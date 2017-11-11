@@ -64,7 +64,7 @@ Examples:
 
 function filterByValue(arr, key){
     return arr.filter(function(val){
-        return val[key];
+        return val[key] !== undefined;
     });
 }
 
@@ -77,10 +77,9 @@ Examples:
 */
 
 function find(arr, searchValue){
-    var res = arr.filter(function(val){
+    return arr.filter(function(val){
         return val === searchValue;
-    });
-    return res.length ? res[0] : undefined;
+    })[0]
 }
 
 /*
@@ -91,10 +90,9 @@ Examples:
 */
 
 function findInObj(arr, key, searchValue){
-    var res = arr.filter(function(obj){
+    return arr.filter(function(obj){
         return obj[key] === searchValue;
-    });
-    return res[0];
+    })[0];
 }
 
 /*
@@ -114,6 +112,15 @@ function removeVowels(str){
     });
     return resArr.join('');
 }
+
+// using indexOf on string
+function removeVowels1(str){
+  var vowels = 'aeiou'
+  return str.toLowerCase().split('').filter(function(letter){
+    return vowels.indexOf(val) === -1
+  }).join('')
+}
+
 
 /*
 Write a function called doubleOddNumbers which accepts an array and returns a new array with all of the odd numbers doubled (HINT - you can use map and fitler to double and then filter the odd numbers).
