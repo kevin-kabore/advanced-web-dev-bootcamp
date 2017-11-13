@@ -89,10 +89,12 @@ Examples:
 
 function once(fn, thisArg) {
   var hasBeenCalled = false;
-  if (!hasBeenCalled) {
-    hasBeenCalled = true;
-    return fn.apply(thisArg, arguments);
-  }
+  return function() {
+    if (!hasBeenCalled) {
+      hasBeenCalled = true;
+      return fn.apply(thisArg, arguments);
+    }
+  };
 }
 
 // BONUSES!

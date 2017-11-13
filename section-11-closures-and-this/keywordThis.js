@@ -4,7 +4,10 @@
 // 3. Explicit binding
 // 4. new keyword
 
-// 3. Explicit binding; explicitly binding the key word this
+// 1. Global context: When set in the global context in a function, it is either the Global
+// object (window if browser) or undefined (if using strict mode)
+// 2. object binding: if declared inside an object its value will be the closest parent object
+// 3. Explicit binding; explicitly binding the key word this using:
 // Call; parameters: thisArg, a, b, c, ...; immediately invoked
 // Apply; parameters: thisArg, [a, b, c, ...]; immediately invoked
 // Bind; parameters: thisArg, a, b, c, ...; not immediately invoked
