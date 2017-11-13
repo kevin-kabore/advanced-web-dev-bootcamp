@@ -99,3 +99,17 @@ coltCal(); // returns Colt just calculated 10
 // also used for partial application of arguments
 var coltCalc = addNumbers.bind(colt, 1, 2); // returns a function
 coltCalc(3, 4); // returns Colt just calculated 10
+
+// bind with async code
+var colt = {
+  firstName: 'Colt',
+  sayHi: function() {
+    setTimeOut(
+      function() {
+        console.log('Hi ' + this.firstName);
+      }.bind(this),
+      1000
+    );
+  }
+};
+colt.sayHi(); // returns 'Hi window' without bind because setTimeout is async so this is attached to the window
