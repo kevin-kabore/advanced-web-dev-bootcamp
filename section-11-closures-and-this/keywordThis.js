@@ -1,3 +1,9 @@
+// 4 rules for determining the value of the keyword thisArg
+// 1. global context
+// 2. Object binding
+// 3. Explicit binding
+// 4. new keyword
+
 // 3. Explicit binding; explicitly binding the key word this
 // Call; parameters: thisArg, a, b, c, ...; immediately invoked
 // Apply; parameters: thisArg, [a, b, c, ...]; immediately invoked
