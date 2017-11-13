@@ -53,7 +53,7 @@ Examples:
 function invokeMax(fn, num) {
   var max = 0;
   return function() {
-    if (max > num) {
+    if (max >= num) {
       return 'Maxed Out!';
     }
     max++;
@@ -98,7 +98,12 @@ function once(fn, thisArg) {
 // BONUSES!
 
 /*
-Write a function called bind which accepts a function and a value for the keyword this. Bind should return a new function that when invoked, will invoke the function passed to bind with the correct value of the keyword this. HINT - if you pass more than two parameters to bind, those parameters should be included as parameters to the inner function when it is invoked. You will have to make use of closure!
+Write a function called bind which accepts a function and a value for the keyword this.
+Bind should return a new function that when invoked, will invoke the function passed
+to bind with the correct value of the keyword this.
+HINT - if you pass more than two parameters to bind, those parameters should be
+included as parameters to the inner function when it is invoked.
+You will have to make use of closure!
 
 Examples:
 
@@ -129,10 +134,22 @@ Examples:
 
 */
 
-function bind(fn, thisArg) {}
+function bind(fn, thisArg) {
+  var outerArgs = [].slice.call(arguments, 2);
+  return function() {
+    var innerArgs = [].slice.call(arguments);
+    var allArgs = outerArgs.concat(innerArgs);
+    return fn.apply(thisArg, allArgs);
+  };
+}
 
 /*
-Write a function called flip which accepts a function and a value for the keyword this. Flip should return a new function that when invoked, will invoke the function passed to flip with the correct value of the keyword this and all of the arguments passed to the function REVERSED. HINT - if you pass more than two parameters to flip, those parameters should be included as parameters to the inner function when it is invoked. You will have to make use of closure!
+Write a function called flip which accepts a function and a value for the keyword this.
+Flip should return a new function that when invoked, will invoke the function passed
+to flip with the correct value of the keyword this and all of the arguments
+passed to the function REVERSED. HINT - if you pass more than two parameters to flip,
+those parameters should be included as parameters to the inner function when it is invoked.
+You will have to make use of closure!
 
 Examples:
 
@@ -165,4 +182,11 @@ Examples:
 
 */
 
-function flip(fn, thisArg) {}
+function flip(fn, thisArg) {
+  var outerArgs = [].slice.call(arguments, 2);
+  return function() {
+    var innerArgs = [].slice.call(arguments);
+    var allArgs = outerArgs.concat(innerArgs).slice(0, fn.length);
+    return fn.apply(thisArg, allArgs.reverse());
+  };
+}
