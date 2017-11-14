@@ -66,3 +66,47 @@ Vehicle.prototype.honk = function() {
     return 'beep';
   }
 };
+
+// Inheritance
+// The passing od methods and properties from one class to another
+// In js you pass the prototype of one constructor to another
+
+// Two parts of Inheritance
+// 1. Set the prototype to be an object created with another prototype
+// 2. Reset the constructor property
+
+function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+Person.prototype.sayHi = function() {
+  return 'Hello ' + this.firstName + ' ' + this.lastName;
+};
+function Student(firstName, lastName) {
+  return Person.apply(this, arguments);
+}
+
+//WRONG
+Student.prototype = Person.prototype;
+var kevin = new Student('Kevin', 'Kabore'); // creates a reference/link so changing student changes person
+kevin.sayHi(); // "Hello Kevin Kabore"
+
+Student.prototype.status = function() {
+  return 'I am currently a student!';
+};
+var kirsten = new Person('Kirsten', 'Peterson');
+kirsten.status(); // "I am currently a student!"
+
+// fix with Object.create()
+function Student(firstName, lastName) {
+  return Person.apply(this, arguments);
+}
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.status = function() {
+  return 'I am currently a student';
+};
+var elie = new Person('Elie', 'Schoppik');
+elie.status(); // return undefined
+// must reset the prototype
+Student.prototype.constructor; //Person
+Student.prototype.constructor = Student;
