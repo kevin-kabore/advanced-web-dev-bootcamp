@@ -36,7 +36,7 @@ Examples:
     person.family.length // 1
 */
 Person.prototype.addToFamily = function(newPerson) {
-  if (newPerson instanceof Person && !this.family.includes(newPerson)) {
+  if (newPerson instanceof Person && this.family.includes(newPerson) === -1) {
     this.family.push(newPerson);
   }
   return this.family.length;
@@ -58,7 +58,12 @@ Examples:
     "tacocat".reverse() // "tacocat"
 */
 String.prototype.reverse = function() {
-  return this.split('')
-    .reverse()
-    .join('');
+  // return this.split('')
+  //   .reverse()
+  //   .join('');
+  var newStr = '';
+  for (var i = this.length - 1; i >= 0; i--) {
+    newStr += this[i];
+  }
+  return newStr;
 };
