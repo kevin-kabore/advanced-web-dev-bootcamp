@@ -33,3 +33,36 @@ function Motorcycle1(make, model, year) {
   Car.apply(this, arguments);
   this.numberOfWheels = 2;
 }
+
+function Person(name) {
+  this.name = name;
+  this.sayHi = function() {
+    return 'Hi ' + this.name;
+  };
+}
+
+// refactor using prototype
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHi = function() {
+  return 'Hi ' + this.name;
+};
+
+function Vehicle(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  isRunning: false;
+}
+Vehicle.prototype.turnOn = function() {
+  this.isRunning = true;
+};
+Vehicle.prototype.turnOff = function() {
+  this.isRunning = false;
+};
+Vehicle.prototype.honk = function() {
+  if (this.isRunning) {
+    return 'beep';
+  }
+};
