@@ -24,4 +24,15 @@ router.post('/', function(req, res) {
     });
 });
 
+router.get('/:todoId', function(req, res) {
+  db.Todo
+    .findById(req.params.todoId)
+    .then(function(todo) {
+      res.json(todo);
+    })
+    .catch(function(err) {
+      res.send(err);
+    });
+});
+
 module.exports = router;
