@@ -62,5 +62,8 @@ Examples:
 */
 
 function reverseArray(arr){
-    return arr.reverse();
+    for (var i = 0; i < array.length/2; i++) {
+      [arr[i], arr[arr.length - 1 - i]] = [arr[arr.length - 1 - i], arr[i]]
+    }
+    return arr;
 }
