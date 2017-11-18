@@ -100,7 +100,7 @@ Examples:
 
 function flip(fn, thisArg, ...outerArgs){
     return function(...innerArgs) {
-        var allArgs = outerArgs.concat(...innerArgs).slice(0, fn.length);
+        var allArgs = outerArgs.concat(...innerArgs).slice(0, fn.length); //to make sure we gather the correct number of args
         return fn.apply(thisArg, allArgs.reverse());
     };
 }
