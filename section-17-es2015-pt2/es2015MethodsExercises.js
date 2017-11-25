@@ -39,12 +39,13 @@ areAllNumbersFinite(finiteNumsExceptOne) // false
 */
 
 function areAllNumbersFinite(arr) {
-  for (var i = 0; i < arr.length; i++) {
-    if (!Number.isFinite(arr[i])) {
-      return false;
-    }
-  }
-  return true;
+  // for (var i = 0; i < arr.length; i++) {
+  //   if (!Number.isFinite(arr[i])) {
+  //     return false;
+  //   }
+  // }
+  // return true;
+  return arr.every(Number.isFinite);
 }
 
 /*
@@ -71,8 +72,8 @@ displayEvenArguments(7,8,9) // [8]
 displayEvenArguments(1,3,7) // []
 */
 
-function displayEvenArguments(...args) {
-  var arr = Array.from(args);
+function displayEvenArguments() {
+  var arr = Array.from(arguments);
   return arr.filter(num => {
     return num % 2 === 0;
   });
