@@ -61,6 +61,14 @@ d3.select('#feeling-lucky')
   .on('click', function(){
     d3.event.preventDefault()
     d3.selectAll('.note').style('font-size', function(){
-      return Math.random() * 40 + 'px'
+      return Math.random() * 100 + 'px'
     })
   })
+
+var preview = d3.select('.preview');
+
+d3.select('input').on('input', function(){
+  var note = d3.event.target.value;
+  preview.text(note)
+    .classed('hide', note === '')
+})
