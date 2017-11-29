@@ -32,7 +32,8 @@ d3.select('#new-note').on('submit', function() {
     .append('p')
     .classed('note', true) // add class of note to p tag
     .text(input.property('value')); // grab value from input field
-  input.property('value', ''); // set value to empty string
+  // input.property('value', ''); // set value to empty string
+  setPreview('')
 });
 // remove all elements on page with selector.remove()
 // d3.selectAll('p').remove();
@@ -69,6 +70,11 @@ var preview = d3.select('.preview');
 
 d3.select('input').on('input', function(){
   var note = d3.event.target.value;
-  preview.text(note)
-    .classed('hide', note === '')
+  setPreview(note)
 })
+
+
+ function setPreview(val){
+   preview.text(val)
+      .classed('hide', val === '')
+ }
