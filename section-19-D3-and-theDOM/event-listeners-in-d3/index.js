@@ -35,4 +35,32 @@ d3.select('#new-note').on('submit', function() {
   input.property('value', ''); // set value to empty string
 });
 // remove all elements on page with selector.remove()
-d3.selectAll('p').remove();
+// d3.selectAll('p').remove();
+
+d3.select('#remove-all')
+    .style('background-color', 'red')
+    .on('mouseover', function() {
+      d3.select(this).style('background-color', '#991b1b').style('cursor', 'pointer')
+    })
+    .on('mouseout', function(){
+      d3.select(this).style('background', 'red')
+    })
+    .on('click', function() {
+      d3.event.preventDefault()
+      d3.selectAll('.note').remove()
+    })
+
+d3.select('#feeling-lucky')
+  .style('background-color', '#5ee04a').style('cursor', 'pointer')
+  .on('mouseover', function() {
+    d3.select(this).style('background-color', '#275e1f')
+  })
+  .on('mouseout', function(){
+    d3.select(this).style('background-color', '#5ee04a')
+  })
+  .on('click', function(){
+    d3.event.preventDefault()
+    d3.selectAll('.note').style('font-size', function(){
+      return Math.random() * 40 + 'px'
+    })
+  })
