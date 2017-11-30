@@ -1,17 +1,27 @@
 var phrase = d3.select('#phrase')
 var count = d3.select('#count')
+var input = d3.select('input')
+
+d3.select('#reset').on('click', function(){
+  d3.selectAll('.letter').remove()
+  phrase.text('')
+  count.text('')
+})
 
 d3.select('form').on('submit', function() {
   d3.event.preventDefault()
 
-  var text = d3.select('input').property('value')
+  var text = input.property('value')
 
-  var data = getFrequencies(text);
+  var data = getFrequencies(text); // gets frequencies and returns sorted arr of obj
 
-  setPhrase(text)
+  setPhrase(text) // sets header phrase
   addLetters(data)
   console.log(data)
+  input.property('value', '')
 })
+
+
 
 function getFrequencies(str) {
   var sorted = str.split('').sort();
@@ -29,20 +39,24 @@ function setPhrase(text){
 }
 
 function addLetters(data) {
-  d3.select('#letters')
-      .selectAll('div')
-        .data(data)
+  var letters = d3.select('#letters') //update selection
+                    .selectAll('div')
+                      .data(data, d => d.character) // key function to join by character
+  letters // exit selection - remove class of new
+        .classed('new', false)
+        .exit()
+        .remove()
+
+  letters // enter selection - add class of new
         .enter()
-        .append('div', d => d.character)
-          .text( d => d.character)
-          .classed('letter new', true)
+        .append('div')
+        .classed('letter new', true)
+        .merge(letters)
           .style('width', '20px')
           .style('line-height', '20px')
           .style('margin-right', '5px')
           .style('height', d => `${d.count * 20}px`)
+          .text( d => d.character)
 
-  count.text(`New characters ${data.length}`)
+  count.text(`New characters ${letters.enter().nodes().length}`)
 }
-
-// for every character append div to #letters with class letter-new
-// second phrase update to class letter and enter to letter new
