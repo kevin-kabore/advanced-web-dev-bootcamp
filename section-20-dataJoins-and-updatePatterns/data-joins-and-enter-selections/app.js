@@ -80,7 +80,7 @@ function addNewQuotes() {
 }
 
 d3.select('#quotes')
-    .style('list-style', 'nonde')
+    .style('list-style', 'none')
   .selectAll('li')
   .data(quotes) // binds data to enter nodes
   .enter() // attaches to placeholder html nodes
