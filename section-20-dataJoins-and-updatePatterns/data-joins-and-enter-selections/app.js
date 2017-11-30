@@ -27,11 +27,56 @@ var quotes = [
   }
 ];
 
+var newQuotes = [
+  {
+    quote: "Houston, we have a problem.",
+    movie: "Apollo 13",
+    year: 1995,
+    rating: "PG-13"
+  }, {
+    quote: "Gentlemen, you can't fight in here! This is the war room!",
+    movie: "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+    year: 1964,
+    rating: "PG"
+  }
+];
+
 var colors = {
   "G" : "#3cff00",
   "PG": "#f9ff00",
   "PG-13": "#ff9000",
   "R": "#ff0000"
+}
+
+// General update pattern
+// used when joining arbitrary number of data to arbitrary number of elements
+// 1. Grab update selection and make any unique changes to that selection ex style
+//    store in a variable
+// 2. Grab exit selection and remove any unecessary elements
+// 3. Grab enter selection and make any changes
+// 4. Merge enter and update selections and make any changes to be shared across both
+var add = d3.select('#add')
+
+add.on('click', addNewQuotes)
+
+function addNewQuotes() {
+  quotes = quotes.concat(newQuotes)
+
+  var listItems = d3.select('#quotes') // update selection
+      .selectAll('li')
+        .data(quotes, d => d.quote)
+
+  listItems // hop into enter selection and style as needed
+        .enter() // will only affect enter selection because
+        .append('li')
+          .text(d => `${d.quote} - ${d.movie} (${d.year}) `)
+          .style('margin', '20px')
+          .style('padding', '0px') // will only affect enter selection because
+          .style('font-size', d => d.quote.length < 25 ? '2em' : '1em')
+          .style('background-color', d => colors[d.rating])
+          .style('border-radius', '8px')
+        .merge(listItems) // merges enter selection with update selection
+  add.remove()
 }
 
 d3.select('#quotes')
@@ -59,8 +104,15 @@ d3.select('#quotes')
 //     .remove() // remove data bind from DOM
 
 // remove all movies with an R rating
-var nonRQuotes = quotes.filter(movie => movie.rating !== "R")
-d3.selectAll('li')
-  .data(nonRQuotes, d => d.quote)
-  .exit()
-  .remove()
+var removeBtn = d3.select('#remove')
+removeBtn.on('click', removeRquotes)
+
+function removeRquotes() {
+  var nonRQuotes = quotes.filter(movie => movie.rating !== "R") // filter out of data arr
+  d3.selectAll('li')
+    .data(nonRQuotes, d => d.quote) // return from key function is how it is bound so two that got filtered out are taken out
+    .exit()
+    .remove()
+
+  removeBtn.remove()
+}
