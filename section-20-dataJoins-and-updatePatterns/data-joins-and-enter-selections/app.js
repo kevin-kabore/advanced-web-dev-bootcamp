@@ -45,6 +45,22 @@ d3.select('#quotes')
     )
     .style('margin', '20px')
     .style('padding', '20px')
-    .style('font-size', d => d.quote.length < 25 ? '2em' : '1em'); // double font size if fewer than 25 chars
+    .style('font-size', d => d.quote.length < 25 ? '2em' : '1em') // double font size if fewer than 25 chars
     .style('background-color', d => colors[d.rating])
     .style('border-radius', '8px')
+
+
+// Remove last quote
+// quotes.pop() // remove last quote from data set
+//
+// d3.selectAll('li')
+//     .data(quotes) // update data binding and moves last Li to exitArr
+//     .exit() // access exit selection
+//     .remove() // remove data bind from DOM
+
+// remove all movies with an R rating
+var nonRQuotes = quotes.filter(movie => movie.rating !== "R")
+d3.selectAll('li')
+  .data(nonRQuotes, d => d.quote)
+  .exit()
+  .remove()
