@@ -1,4 +1,5 @@
 var phrase = d3.select('#phrase')
+var count = d3.select('#count')
 
 d3.select('form').on('submit', function() {
   d3.event.preventDefault()
@@ -39,7 +40,8 @@ function addLetters(data) {
           .style('line-height', '20px')
           .style('margin-right', '5px')
           .style('height', d => `${d.count * 20}px`)
-          // .classed('letter', true)
+
+  count.text(`New characters ${data.length}`)
 }
 
 // for every character append div to #letters with class letter-new
