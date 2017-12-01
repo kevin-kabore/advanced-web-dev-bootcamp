@@ -17,7 +17,6 @@ d3.select('form').on('submit', function() {
 
   setPhrase(text) // sets header phrase
   addLetters(data)
-  console.log(data)
   input.property('value', '')
 })
 
