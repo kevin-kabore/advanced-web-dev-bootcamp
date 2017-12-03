@@ -1,8 +1,16 @@
+body{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
 svg {
+  margin-top: 50px;
   border: 3px solid black;
   width: 600px;
   height: 300px;
 }
+
 .israel {
   border: 3px solid black;
   width: 600px;
