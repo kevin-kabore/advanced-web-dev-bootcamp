@@ -9,4 +9,22 @@ svg {
   height: 310px;
 }
 
+#bahamas{
+  width: 600px;
+  height: 300px;
+  border: 1px solid black;
+  background-color: #00abc9;
+}
+
+#jamaica{
+  width: 600px;
+  height: 300px;
+  border: 1px solid black;
+  background-color: black;
+}
+
+#macedonia {
+  width: 600px;
+  height: 300px;
+  background-color: #d20000;
 }
