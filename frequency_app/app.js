@@ -1,6 +1,11 @@
 var phrase = d3.select('#phrase')
 var count = d3.select('#count')
 var input = d3.select('input')
+var height = 400
+var width = 400
+var barWidth = 30
+var barPadding = 25
+
 
 d3.select('#reset').on('click', function(){
   d3.selectAll('.letter').remove()
@@ -8,9 +13,10 @@ d3.select('#reset').on('click', function(){
   count.text('')
 })
 
+
+
 d3.select('form').on('submit', function() {
   d3.event.preventDefault()
-
   var text = input.property('value')
 
   var data = getFrequencies(text); // gets frequencies and returns sorted arr of obj
@@ -37,9 +43,12 @@ function setPhrase(text){
   phrase.text(`Analysis of: ${text}`);
 }
 
+
 function addLetters(data) {
   var letters = d3.select('#letters') //update selection
-                    .selectAll('div')
+                  .attr('width', width)
+                  .attr('height', height)
+                    .selectAll('rect')
                       .data(data, d => d.character) // key function to join by character
   letters // exit selection - remove class of new
         .classed('new', false)
@@ -48,14 +57,25 @@ function addLetters(data) {
 
   letters // enter selection - add class of new
         .enter()
-        .append('div')
+        .append('rect')
         .classed('letter new', true)
+        .attr('width', barWidth)
+        .attr('height', function(d, i){
+          return d.count * 10
+        })
+        .attr('y', function(d, i){
+          return height - (d.count * 10)
+        })
+        .attr('x', function(d, i){
+          return (barWidth + barPadding) * i
+        })
+        .attr('fill', 'green')
         .merge(letters)
-          .style('width', '20px')
-          .style('line-height', '20px')
-          .style('margin-right', '5px')
-          .style('height', d => `${d.count * 20}px`)
-          .text( d => d.character)
+          // .style('width', '20px')
+          // .style('line-height', '20px')
+          // .style('margin-right', '5px')
+          // .style('height', d => `${d.count * 20}px`)
+          // .text( d => d.character)
 
   count.text(`New characters ${letters.enter().nodes().length}`)
 }

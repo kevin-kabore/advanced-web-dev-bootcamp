@@ -37,11 +37,13 @@ form > button:hover {
 .letter {
   display: inline-block;
   text-align: center;
-  background-color: #ffc800;
+  fill: #0cff00;
+  /*background-color: #ffc800;*/
   vertical-align: bottom;
 }
 
 .new {
   font-size: 1.5em;
-  color: #ffffff;
+  fill: #ffd800;
+  /*color: #ffffff;*/
 }
