@@ -33,8 +33,8 @@ d3.select('svg')
 
 d3.select('svg')
   .append('g')
-  .attr('transform', 'translate(' + padding + ',0)')
-  .call(yAxis);
+    .attr('transform', 'translate(' + padding + ',0)')
+    .call(yAxis);
 
 d3.select('svg')
     .attr('width', width)
