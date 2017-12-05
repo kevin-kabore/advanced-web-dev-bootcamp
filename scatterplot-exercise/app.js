@@ -3,12 +3,29 @@ var width = 500;
 var height = 500;
 var padding = 30;
 
+var data = regionData.filter(mustHaveKeys);
+
+function mustHaveKeys(obj){
+  var keys = [
+    'subscribersPer100',
+    'adultLiteracyRate',
+    'urbanPopulationRate',
+    'extremePovertyRate'
+  ]
+  for (var i = 0; i < keys.length; i++) {
+    if (obj[keys[i]] === null) {
+      return false
+    }
+  }
+  return true;
+};
+
 var yScale = d3.scaleLinear()
-                .domain(d3.extent(regionData, d => d.subscribersPer100))
+                .domain(d3.extent(data, d => d.subscribersPer100))
                 .range([height - padding, padding]);
 
 var xScale = d3.scaleLinear()
-                .domain(d3.extent(regionData, d => d.adultLiteracyRate))
+                .domain(d3.extent(data, d => d.adultLiteracyRate))
                 .range([padding, width - padding]);
 
 var xAxis = d3.axisBottom(xScale)
@@ -20,11 +37,11 @@ var yAxis = d3.axisLeft(yScale)
               .tickSizeOuter(0);
 
 var colorScale = d3.scaleLinear()
-                    .domain(d3.extent(regionData, d => d.extremePovertyRate))
+                    .domain(d3.extent(data, d => d.extremePovertyRate))
                     .range(['green', 'red']);
 
 var radiusScale = d3.scaleLinear()
-                    .domain(d3.extent(regionData, d => d.urbanPopulationRate))
+                    .domain(d3.extent(data, d => d.urbanPopulationRate))
                     .range([4,30]);
 
 d3.select('svg')
@@ -41,7 +58,7 @@ d3.select('svg')
     .attr('width', width)
     .attr('height', height)
   .selectAll('circle')
-  .data(regionData)
+  .data(data)
   .enter()
   .append('circle')
     .attr('cx', d => xScale(d.adultLiteracyRate))
