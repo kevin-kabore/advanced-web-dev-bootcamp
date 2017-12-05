@@ -38,7 +38,7 @@ var yAxis = d3.axisLeft(yScale)
 
 var colorScale = d3.scaleLinear()
                     .domain(d3.extent(data, d => d.extremePovertyRate))
-                    .range(['green', 'red']);
+                    .range(['blue', 'green']);
 
 var radiusScale = d3.scaleLinear()
                     .domain(d3.extent(data, d => d.urbanPopulationRate))
@@ -81,7 +81,7 @@ d3.select('svg')
   .attr('y', padding)
   .style('text-anchor', 'middle')
   .style('font-size', '1.2em')
-  .text('Adult Literacy Rate per Cellular Subscribers')
+  .text('Literacy Rate vs Cellular Subscribers')
 
 d3.select('svg')
   .append('text')
@@ -90,4 +90,4 @@ d3.select('svg')
   .attr('y', padding)
   .attr('dy', '-1.2em')
   .style('text-anchor', 'middle')
-  .text('Cellular Subscribers (100)')
+  .text('Cellular Subscribers per 100 people')
