@@ -40,8 +40,8 @@ svg
   .classed('title', true)
   .attr('x', width /2)
   .attr('y', 20)
-  .style('font-size', '2em')
-  .style('text-anchor, middle');
+  .style('font-size', '1.4em')
+  .style('text-anchor', 'middle');
 
 d3.select('input')
     .property('min', minYear)
