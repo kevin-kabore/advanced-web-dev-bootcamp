@@ -1,7 +1,8 @@
 var minYear = d3.min(birthData, d => d.year);
+var maxYear = d3.max(birthData, d => d.year);
 var width = 600;
 var height = 600;
-var yearData = birthData.filter(d => d.year === minYear);
+
 
 var continents = [];
 for (var i = 0; i < birthData.length; i++) {
@@ -9,7 +10,7 @@ for (var i = 0; i < birthData.length; i++) {
   if (continents.indexOf(continent) === -1) {
     continents.push(continent)
   }
-}
+};
 
 var colorScale = d3.scaleOrdinal()
                    .domain(continents)
@@ -22,20 +23,45 @@ d3.select('svg')
     .attr('transform', 'translate('+ width/2 + ',' + height/2 + ')')
     .classed('chart', true);
 
-var arcs = d3.pie()
-             .value(d => d.births)
-             (yearData);
+d3.select('input')
+    .property('min', minYear)
+    .property('max', maxYear)
+    .property('value', minYear)
+    .on('input', function(){
+      makeGraph(+d3.event.target.value);
+    })
 
-var path = d3.arc()
-             .outerRadius(width / 2 - 10)
-             .innerRadius(width / 4);
+makeGraph(minYear);
 
-d3.select('.chart')
-  .selectAll('.arc')
-  .data(arcs)
-  .enter()
-  .append('path')
-    .classed('arc', true)
-    .attr('fill', d => colorScale(d.data.continent))
-    .attr('stroke', 'black')
-    .attr('d', path)
+function makeGraph(year){
+  var yearData = birthData.filter(d => d.year === year);
+
+  var arcs = d3.pie()
+               .value(d => d.births)
+               (yearData);
+
+  var path = d3.arc()
+               .outerRadius(width / 2 - 10)
+               .innerRadius(width / 4);
+
+  // general update pattern
+  // select update selection and store in variable
+  var update = d3.select('.chart')
+                 .selectAll('.arc')
+                 .data(arcs);
+  // remove any uneccessary items in exit selection
+  update
+    .exit()
+    .remove();
+
+  // then in enter selection
+  update
+    .enter()
+    .append('path')
+      .classed('arc', true)
+    .merge(update)   // then merge enter with update selection and set styles
+      .attr('fill', d => colorScale(d.data.continent))
+      .attr('stroke', 'black')
+      .attr('d', path);
+
+}
