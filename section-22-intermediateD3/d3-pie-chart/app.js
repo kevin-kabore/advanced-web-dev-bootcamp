@@ -68,5 +68,3 @@ function makeGraph(year){
       .attr('fill', d => colorScale(d.data.continent))
       .attr('stroke', 'black')
       .attr('d', path);
-
-}
