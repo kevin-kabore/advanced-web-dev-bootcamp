@@ -38,11 +38,16 @@ function makeGraph(year){
 
   var arcs = d3.pie()
                .value(d => d.births)
+               .sort(function(a, b){
+                 if (a.continent < b.continent) return -1 // sort by continent
+                 else if (a.continent > b.continent) return 1
+                 else return a.births - b.births // then by birth count
+               })
                (yearData);
 
   var path = d3.arc()
                .outerRadius(width / 2 - 10)
-               .innerRadius(width / 4);
+               .innerRadius(width / 4)
 
   // general update pattern
   // select update selection and store in variable
