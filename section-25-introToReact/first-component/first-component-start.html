@@ -11,18 +11,25 @@
 <body>
   <div id="app"></div>
   <script type="text/babel">
+    class HobbyList extends React.Component {
+      render(){
+        const listStyle = {fontSize: '1.5em'}
+        const hobbies = ['Sleeping', 'Eating', 'Cuddling']
+        return (
+          <ul>
+            {hobbies.map((hobby, i) => <li key={i} style={listStyle}>{hobby}</li>)}
+          </ul>
+        )
+      }
+    }
     class Pet extends React.Component {
       render() {
-        const listStyle = {fontSize: '1.5em'}
         return (
           <div className="card">
             <h2 className="name">Moxie</h2>
             <img src="https://github.com/tigarcia/Moxie/raw/master/moxie.png" alt="Moxie the cat"/>
             <h5 style={{fontSize: '2em', margin:'2px'}}>Hobbies:</h5>
-            <ul>
-              <li style={listStyle}>Sleep</li>
-              <li style={listStyle}>Eat</li>
-            </ul>
+            <HobbyList />
           </div>
         )
       }
