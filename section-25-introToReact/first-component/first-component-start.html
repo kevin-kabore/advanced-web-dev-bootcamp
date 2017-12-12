@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Component 1</title>
+    <link rel="stylesheet" href="./style.css">
     <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
@@ -12,10 +13,16 @@
   <script type="text/babel">
     class Pet extends React.Component {
       render() {
+        const listStyle = {fontSize: '1.5em'}
         return (
-          <div>
-            <h2>Moxie</h2>
+          <div className="card">
+            <h2 className="name">Moxie</h2>
             <img src="https://github.com/tigarcia/Moxie/raw/master/moxie.png" alt="Moxie the cat"/>
+            <h5 style={{fontSize: '2em', margin:'2px'}}>Hobbies:</h5>
+            <ul>
+              <li style={listStyle}>Sleep</li>
+              <li style={listStyle}>Eat</li>
+            </ul>
           </div>
         )
       }
