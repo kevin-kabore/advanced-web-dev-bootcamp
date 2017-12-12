@@ -1,0 +1,18 @@
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  color: white;
+  background-color: rgb(52, 72, 104)
+}
+
+.navbar-li {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding-right: 15px;
+  padding-top: 10px;
+  font-size: 1.2em;
+}
