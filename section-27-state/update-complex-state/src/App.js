@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
 
-class InstructorItem extends  Component {
-  static propTypes = {
-    name: PropTypes.string,
-    hobbies: PropTypes.arrayOf(PropTypes.string)
-  }
-  render() {
-    return (
-      <li>
-        <h3>{this.props.name}</h3>
-        <h4>Hobbies: {this.props.hobbies.join(', ')}</h4>
-      </li>
-    );
-  }
+// If functional component use propTypes after
+const InstructorItem = props => {
+  // static propTypes = {
+  //   name: PropTypes.string,
+  //   hobbies: PropTypes.arrayOf(PropTypes.string)
+  // }
+  return (
+    <li>
+      <h3>{props.name}</h3>
+      <h4>Hobbies: {props.hobbies.join(', ')}</h4>
+    </li>
+  );
+}
+
+InstructorItem.propTypes = {
+  name: PropTypes.string,
+  hobbies: PropTypes.arrayOf(PropTypes.string)
 }
 
 class App extends Component {
