@@ -2,65 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 import Box from './Box';
 
+const NUM_BOXES = 32
 class App extends Component {
-
   constructor(props) {
     super(props);
-    const randColor = () => props.allColors[Math.floor(Math.random() * this.props.allColors.length)];
-    this.state = {
-      boxes: [
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()},
-        {color: randColor()}
-      ]
-    }
+    const boxes = Array(NUM_BOXES).fill().map(this.randColor, this);
+    this.state = {boxes};
 
     setInterval(() => {
-      const randBoxI = Math.floor(Math.random() * this.state.boxes.length)
+
       const randColorI = Math.floor(Math.random() * this.props.allColors.length)
 
-      const boxes = this.state.boxes.map((box, i) => {
-        if (i === randBoxI) {
-          return {color: this.props.allColors[randColorI]}
-        } else {
-          return box;
-        }
-      })
+      const boxes = this.state.boxes.slice();
+      const randBoxI = Math.floor(Math.random() * boxes.length);
+      boxes[randBoxI] = this.randColor();
+
       this.setState({boxes})
 
     }, 300)
   }
+
+  randColor() {
+    return this.props.allColors[Math.floor(Math.random() * this.props.allColors.length)];
+  }
   render() {
-    const boxes = this.state.boxes.map((b, i) => <Box key={i} color={b.color}/>)
+    const boxes = this.state.boxes.map((color, i) => <Box key={i} color={color}/>)
     return (
       <div className="App">
         {boxes}
