@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
-import './Recipe.css'
+import PropTypes from 'prop-types';
+import './Recipe.css';
 
 class Recipe extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+    instructions: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired
+  }
   render() {
     const {title, img, instructions} = this.props;
     const ingredients = this.props.ingredients.map((ing, index) => (
