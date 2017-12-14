@@ -7,10 +7,12 @@ class Recipe extends Component {
     title: PropTypes.string.isRequired,
     ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
     instructions: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired
+    img: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired
   }
   render() {
-    const {title, img, instructions} = this.props;
+    const {title, img, instructions, onDelete, id} = this.props;
     const ingredients = this.props.ingredients.map((ing, index) => (
       <li key={index}>{ing}</li>
     ))
@@ -26,7 +28,8 @@ class Recipe extends Component {
             {ingredients}
           </ul>
           <h4>Instructions:</h4>
-          <p style={{paddingBottom: 50 + 'px'}}>{instructions}</p>
+          <p>{instructions}</p>
+          <button type="button" onClick={() => onDelete(id)}>DELETE</button>
         </div>
       </div>
     )
