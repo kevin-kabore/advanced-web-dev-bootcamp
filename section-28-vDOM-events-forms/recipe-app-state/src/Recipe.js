@@ -23,7 +23,7 @@ class Recipe extends Component {
           <h3 className="recipe-title">{title}</h3>
           <h4>Ingredients:</h4>
           <ul>
-          {ingredients}
+            {ingredients}
           </ul>
           <h4>Instructions:</h4>
           <p style={{paddingBottom: 50 + 'px'}}>{instructions}</p>
