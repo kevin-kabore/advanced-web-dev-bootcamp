@@ -2,8 +2,8 @@ import React from 'react';
 import Card from './Card';
 import './CardList.css';
 
-const CardList = props => {
-  const cards = props.cards.map((color, i) => <Card key={i} color={color}/>)
+const CardList = ({cards}) => {
+  const cards = props.cards.map((card, i) => <Card key={card.id} {...card}/>)
   return (
     <ul>
       {cards}

@@ -7,12 +7,12 @@ class Card extends Component {
   }
 
   render(){
-    const {color} = this.props
+    const {id, cardState, backgroundColor} = this.props
     const style = {
       width: '150px',
       height: '160px',
       borderRadius: '25px',
-      backgroundColor: color
+      backgroundColor: backgroundColor
     }
     return (
       <div style={style}>
