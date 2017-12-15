@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Navbar.css';
 
-class Navbar extends Component {
-  render() {
-    return (
-      <header className="navbar-container">
-        <h2 >Memory Game</h2>
-        <nav className="navbar-list">
-          <li><a>New Game</a></li>
-        </nav>
-      </header>
-    )
-  }
+const Navbar = ({onNewGame}) => {
+  return (
+    <header className="navbar-container">
+      <h2 >Memory Game</h2>
+      <nav className="navbar-list">
+        <li><a onClick={() => onNewGame()}>New Game</a></li>
+      </nav>
+    </header>
+  )
+}
+
+Navbar.propTypes = {
+  onNewGame: PropTypes.func.isRequired
 }
 
 export default Navbar;

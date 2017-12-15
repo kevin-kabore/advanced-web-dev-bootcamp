@@ -36,22 +36,36 @@ class App extends Component {
       {id: 14, cardState: CardState.HIDING, backgroundColor: 'SandyBrown'},
       {id: 15, cardState: CardState.HIDING, backgroundColor: 'SandyBrown'}
     ];
-    cards = this.shuffle(cards)
-    this.state = {cards: cards, noClick: false}
-    this.handleSelect = this.handleSelect.bind(this)
-
+    cards = this.shuffle(cards);
+    this.state = {cards: cards, noClick: false};
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleNewGame = this.handleNewGame.bind(this);
   }
 
-  handleSelect(id, cardState){
-    const cards = this.state.cards.slice();
-    const card = cards.find(card => card.id === id)
-    const index = cards.findIndex(card => card.id === id)
-    card.cardState = CardState.SHOWING
+  handleNewGame() {
+    let cards = this.state.cards.map(card => ({
+      ...card,
+      cardState: CardState.HIDING
+    }))
+    cards = this.shuffle(cards);
+    this.setState({cards});
+  }
 
-    cards[index] = card
+  handleSelect(id){
+    this.setState(prevState => {
+      let cards = prevState.cards.map(card => (
+        card.id === id ? {
+          ...card,
+          cardState: card.cardState === CardState.HIDING ?  CardState.MATCHING : CardState.HIDING
+        } : card
+      ))
+      return {cards};
+    });
+  }
 
-    // check if matching card is Showing
-    this.setState({cards})
+
+  findMatches(){
+
   }
 
   shuffle(array) {
@@ -61,10 +75,11 @@ class App extends Component {
     }
     return array
   }
+
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <Navbar onNewGame={this.handleNewGame}/>
         <Game cards={this.state.cards} onSelect={this.handleSelect}/>
       </div>
     );
