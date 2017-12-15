@@ -3,6 +3,11 @@ import Navbar from './Navbar'
 import Game from './Game'
 import './App.css';
 
+// Hiding - the card is not being shown
+// SHOWING - the card is being shown but does not have a match yet
+// MATCHING - the card is being shown and has a match.
+              // the card should never move from MATCHING to another cardState during a game play
+
 const CardState = {
   HIDING: 0,
   SHOWING: 1,
@@ -12,7 +17,6 @@ const CardState = {
 class App extends Component {
   constructor(props) {
     super(props);
-
     // The cards that we will use for our state
     let cards = [
       {id: 0, cardState: CardState.HIDING, backgroundColor: 'red'},
@@ -32,24 +36,36 @@ class App extends Component {
       {id: 14, cardState: CardState.HIDING, backgroundColor: 'SandyBrown'},
       {id: 15, cardState: CardState.HIDING, backgroundColor: 'SandyBrown'}
     ];
+    cards = this.shuffle(cards)
+    this.state = {cards: cards, noClick: false}
+    this.handleSelect = this.handleSelect.bind(this)
 
-    this.state = {
-      cards: shuffle(cards)
+  }
+
+  handleSelect(id, cardState){
+    const cards = this.state.cards.slice();
+    const card = cards.find(card => card.id === id)
+    const index = cards.findIndex(card => card.id === id)
+    card.cardState = CardState.SHOWING
+
+    cards[index] = card
+
+    // check if matching card is Showing
+    this.setState({cards})
+  }
+
+  shuffle(array) {
+    for (let i = array.length -1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i+1));
+      [array[i], [array[j]]] = [array[j], [array[i]]];
     }
-
-    shuffle(array) {
-      for (let i = 0; i < array.length -1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i+1));
-        [array[i], [array[j]]] = [array[j], [array[i]]]
-      }
-      return array
-    };
+    return array
   }
   render() {
     return (
       <div className="App">
         <Navbar />
-        <Game cards={this.state.cards}/>
+        <Game cards={this.state.cards} onSelect={this.handleSelect}/>
       </div>
     );
   }
