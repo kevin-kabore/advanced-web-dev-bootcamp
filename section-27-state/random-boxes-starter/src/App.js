@@ -9,7 +9,7 @@ class App extends Component {
     const boxes = Array(NUM_BOXES).fill().map(this.randColor, this);
     this.state = {boxes};
 
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
 
       const randColorI = Math.floor(Math.random() * this.props.allColors.length)
 
@@ -20,6 +20,10 @@ class App extends Component {
       this.setState({boxes})
 
     }, 300)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.intervalId);
   }
 
   randColor() {
