@@ -52,20 +52,51 @@ class App extends Component {
   }
 
   handleSelect(id){
-    this.setState(prevState => {
-      let cards = prevState.cards.map(card => (
-        card.id === id ? {
-          ...card,
-          cardState: card.cardState === CardState.HIDING ?  CardState.MATCHING : CardState.HIDING
-        } : card
-      ))
-      return {cards};
-    });
-  }
+    const mapCardState = (cards, idsToChange, newCardState) => {
+      return cards.map(card => {
+        if (idsToChange.includes(card.id)) {
+          return {
+            ...card,
+            cardState: newCardState
+          };
+        }
+        return card;
+      });
+    }
 
+    const foundCard = this.state.cards.find(card => card.id === id);
+    // if found card not hiding, do nothing
+    if (this.state.noClick || foundCard.cardState !== CardState.HIDING) {
+      return;
+    }
 
-  findMatches(){
+    let noClick = false;
+    // update state of clicked card to showing
+    let cards = mapCardState(this.state.cards, [id], CardState.SHOWING);
+    // take out only showing cards
+    const showingCards = cards.filter((c) => c.cardState === CardState.SHOWING);
+    // get ids of all showing cards
+    const ids = showingCards.map(c => c.id);
+    // if 2 cards showing and backgroundColors match
+    if (showingCards.length === 2 && showingCards[0].backgroundColor === showingCards[1].backgroundColor) {
+      // change state of both cards to matching
+      cards = mapCardState(cards, ids, CardState.MATCHING);
+    } else if (showingCards.length === 2) {
+      // otherwise 2 cards showing and they don't match so need to hide them
+      let hidingCards = mapCardState(cards, ids, CardState.HIDING);
 
+      noClick = true;
+      // keep cards showing for 1.3s and then update state to hide cards
+      // while cards showing can't click
+      this.setState({cards,noClick}, () => {
+        setTimeout(() => {
+          this.setState({cards: hidingCards, noClick: false});
+        }, 1300);
+      });
+      return; // exit function
+    }
+    // only hit this setState if only one card showing and no match or 2 cards showing that match
+    this.setState({cards, noClick})
   }
 
   shuffle(array) {

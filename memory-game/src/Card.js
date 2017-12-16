@@ -5,7 +5,7 @@ import './Card.css';
 class Card extends Component {
 
   render(){
-    const {id, cardState, showing, backgroundColor, onSelect} = this.props
+    const {id, showing, backgroundColor, onSelect} = this.props
     let style = {}
     if (showing) {
       style.backgroundColor = backgroundColor
