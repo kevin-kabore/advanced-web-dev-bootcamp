@@ -1,32 +1,18 @@
 import React from 'react';
-import './ChoiceForm.css'
-const ChoiceForm = props => {
+import './ChoiceForm.css';
+
+const ChoiceForm = ({countries}) => {
+  countries = countries.map((c, i) => (
+    <div key={i} className="radio">
+      <label>
+        <input type="radio" value={`option${i+1}`} checked={false} />
+          <p>{c.name}</p>
+      </label>
+    </div>
+  ))
   return (
     <form className="choice-form">
-      <div className="radio">
-        <label>
-          <input type="radio" value="option1" checked={true} />
-          Option 1
-        </label>
-      </div>
-      <div className="radio">
-        <label>
-          <input type="radio" value="option2" checked={false} />
-          Option 2
-        </label>
-      </div>
-      <div className="radio">
-        <label>
-          <input type="radio" value="option3" checked={false} />
-          Option 3
-        </label>
-      </div>
-      <div className="radio">
-        <label>
-          <input type="radio" value="option4" checked={false} />
-          Option 4
-        </label>
-      </div>
+      {countries}
     </form>
   )
 }
