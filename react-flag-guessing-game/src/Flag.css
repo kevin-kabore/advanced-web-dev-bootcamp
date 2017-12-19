@@ -4,3 +4,12 @@
   min-width: 50%;
   margin: auto;
 }
+
+@media (max-width: 480px) {
+  .flag {
+    background-size: 100% 100%;
+    min-height: 30%;
+    min-width: 80%;
+    margin: auto;
+  }
+}
