@@ -2,7 +2,6 @@ import React from 'react';
 import './ChoiceForm.css';
 
 const ChoiceForm = ({countries, handleChange, checked, handleSubmit}) => {
-  console.log(checked);
   countries = countries.map((c, i) => (
     <div key={i} className="radio">
       <label>

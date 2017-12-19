@@ -38,7 +38,6 @@ class App extends Component {
 
   handleReset() {
     const allCountiesUrl = 'https://restcountries.eu/rest/v2/all';
-
     fetch(allCountiesUrl)
       .then(data => data.json())
       .then(data => data.map(c => {
