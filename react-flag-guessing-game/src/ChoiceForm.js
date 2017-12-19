@@ -12,7 +12,7 @@ const ChoiceForm = ({countries, handleChange, checked, handleSubmit}) => {
           checked={checked === c.name}
           onChange={handleChange}
         />
-          <p>{c.name}</p>
+        {c.name}
       </label>
     </div>
   ))

@@ -4,7 +4,7 @@ const Result = ({result, handleReset}) => {
   return (
     <div>
       <p>{result}</p>
-      <button onClick={handleReset}>NEXT</button>
+      <button className="btn" onClick={handleReset}>NEXT</button>
     </div>
   )
 }

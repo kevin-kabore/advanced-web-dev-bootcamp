@@ -33,7 +33,6 @@ class App extends Component {
       this.setState({result: 'Correct!'})
     } else if (this.state.checked.length > 0 && this.state.checked !== this.state.answer.name ) {
       this.setState({result: `Incorrect! Correct answer: ${this.state.answer.name}`})
-
     }
   }
 

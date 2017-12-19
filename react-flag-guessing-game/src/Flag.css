@@ -1,6 +1,6 @@
 .flag {
   background-size: 100% 100%;
-  min-height: 400px;
-  width: 50%;
+  min-height: 50%;
+  min-width: 50%;
   margin: auto;
 }
