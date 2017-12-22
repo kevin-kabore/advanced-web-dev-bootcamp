@@ -1,0 +1,22 @@
+.signup-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-component form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.signup-component form label {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.signup-component form label input {
+  height: 2em;
+}
