@@ -39,5 +39,5 @@ app.get('/api/messages', function(req, res, next) {
 const PORT = 3001;
 
 app.listen(PORT, function() {
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}...`);
 });

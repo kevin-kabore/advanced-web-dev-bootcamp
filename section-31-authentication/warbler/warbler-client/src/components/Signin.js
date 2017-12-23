@@ -1,37 +1,31 @@
 import React, { Component } from 'react';
-import '../styles/Signup.css';
+import '../styles/signin.css';
 
-class Signup extends Component {
+class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      username: '',
-      password: '',
-      profileImageUrl: ''
+      password: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.createUser(this.state);
-  }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.loginUser(this.state);
+  }
   render() {
     return (
-      <div className="signup-component">
-        <h1>Join Warbler today.</h1>
+      <div className="signin-component">
+        <h1>Welcome Back.</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Email
+            E-mail
             <input type="email" name="email" onChange={this.handleChange} />
-          </label>
-          <label>
-            Username
-            <input type="text" name="username" onChange={this.handleChange} />
           </label>
           <label>
             Password
@@ -41,15 +35,11 @@ class Signup extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <label>
-            Image Url
-            <input type="text" name="image" onChange={this.handleChange} />
-          </label>
-          <button type="submit">Sign up</button>
+          <button type="submit">Log in</button>
         </form>
       </div>
     );
   }
 }
 
-export default Signup;
+export default Signin;

@@ -1,17 +1,17 @@
-.signup-component {
+.signin-component {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.signup-component form label {
+.signin-component form label {
   display: flex;
   flex-direction: column;
   padding-bottom: 5px;
 }
 
-.signup-component form label input {
+.signin-component input {
   height: 1.5em;
   width: 270px;
   margin-top: 5px;
@@ -19,7 +19,7 @@
   padding-bottom: 5px;
 }
 
-.signup-component form button {
+.signin-component form button {
   border-radius: 5px;
   width: 75px;
   height: 25px;
