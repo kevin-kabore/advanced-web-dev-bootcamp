@@ -5,6 +5,7 @@ const setCurrentUser = currentUser => {
 };
 
 const clearCurrentUser = () => {
+  console.log('logging out user');
   localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
 };
 

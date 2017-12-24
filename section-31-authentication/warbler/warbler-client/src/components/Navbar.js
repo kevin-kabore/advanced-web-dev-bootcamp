@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = props => {
+  const { currentUser, onLogout } = props;
   return (
     <div className="navbar navbar-default">
       <div className="container-fluid">
@@ -16,6 +17,11 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/signin">Sign in</Link>
+          </li>
+          <li>
+            <Link to="/signin" onClick={onLogout}>
+              Log out
+            </Link>
           </li>
         </ul>
       </div>

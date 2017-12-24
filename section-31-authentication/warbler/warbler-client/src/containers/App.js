@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import * as action from '../actions';
+import * as actions from '../actions';
 import Main from './Main';
 import Navbar from '../components/Navbar';
 import '../styles/App.css';
 // import * as apiCalls from '../api';
 
-const App = ({ currentUser }) => (
+const App = ({ currentUser, onLogout }) => (
   <div className="App">
-    <Navbar />
+    <Navbar currentUser={currentUser} onLogout={onLogout} />
     <Main />
   </div>
 );
@@ -42,4 +42,9 @@ const App = ({ currentUser }) => (
 const mapStateToProps = state => ({
   currentUser: state.currentUser
 });
-export default withRouter(connect(mapStateToProps, null)(App));
+const mapDispatchToProps = dispatch => ({
+  onLogout() {
+    dispatch(actions.userLogout());
+  }
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -15,7 +15,7 @@ class Signup extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createUser(this.state);
+    this.props.onSignup(this.state);
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });

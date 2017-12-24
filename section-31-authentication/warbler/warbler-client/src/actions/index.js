@@ -1,8 +1,10 @@
-export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
-
 export const authenticateUser = currentUser => ({
-  type: AUTHENTICATE_USER,
+  type: 'AUTHENTICATE_USER',
   currentUser
+});
+
+export const userLogout = () => ({
+  type: 'USER_LOGOUT'
 });
 
 const authRequest = (authInfo, url) => {
@@ -32,5 +34,10 @@ const authRequest = (authInfo, url) => {
 
 export const signin = authInfo => (dispatch, getState) =>
   authRequest(authInfo, '/api/auth/signin').then(currentUser =>
+    dispatch(authenticateUser(currentUser))
+  );
+
+export const signup = authInfo => (dispatch, getState) =>
+  authRequest(authInfo, '/api/auth/signup').then(currentUser =>
     dispatch(authenticateUser(currentUser))
   );
