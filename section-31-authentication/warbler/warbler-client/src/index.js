@@ -1,14 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import App from './App';
+import Warbler from './containers/Warbler';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById('root')
-);
+ReactDOM.render(<Warbler />, document.getElementById('root'));
 registerServiceWorker();

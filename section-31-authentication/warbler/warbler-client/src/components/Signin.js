@@ -16,7 +16,7 @@ class Signin extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.loginUser(this.state);
+    this.props.onSignin(this.state);
   }
   render() {
     return (

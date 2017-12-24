@@ -1,0 +1,36 @@
+export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
+
+export const authenticateUser = currentUser => ({
+  type: AUTHENTICATE_USER,
+  currentUser
+});
+
+const authRequest = (authInfo, url) => {
+  return fetch(url, {
+    method: 'post',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(authInfo)
+  }).then(resp => {
+    if (!resp.ok) {
+      if (resp.status >= 400 && resp.status < 500) {
+        return resp.json().then(data => {
+          let err = { authErrorMessage: data.message };
+          throw err;
+        });
+      } else {
+        let err = {
+          authErrorMessage: 'Please try again later. Server is not responding'
+        };
+        throw err;
+      }
+    }
+    return resp.json();
+  });
+};
+
+export const signin = authInfo => (dispatch, getState) =>
+  authRequest(authInfo, '/api/auth/signin').then(currentUser =>
+    dispatch(authenticateUser(currentUser))
+  );
