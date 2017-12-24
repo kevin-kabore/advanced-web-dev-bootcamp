@@ -1,0 +1,26 @@
+.signin-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin-component form label {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+}
+
+.signin-component input {
+  height: 1.5em;
+  width: 270px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+  padding-bottom: 5px;
+}
+
+.signin-component form button {
+  border-radius: 5px;
+  width: 75px;
+  height: 25px;
+}
