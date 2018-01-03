@@ -4,18 +4,16 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 import Signup from '../components/Signup';
 import Signin from '../components/Signin';
+import Feed from '../components/Feed';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
-      currentUser,
+      // currentUser,
       authErrorMessage,
       handleSignin,
-      handleSignup
+      handleSignup,
+      history
     } = this.props;
     return (
       <div className="container">
@@ -26,7 +24,7 @@ class Main extends Component {
             render={props => (
               <Signup
                 onSignup={authInfo =>
-                  handleSignup(authInfo).then(user => console.log(user))}
+                  handleSignup(authInfo).then(() => history.push('/'))}
                 errorMessage={authErrorMessage}
               />
             )}
@@ -37,11 +35,12 @@ class Main extends Component {
             render={props => (
               <Signin
                 onSignin={authInfo =>
-                  handleSignin(authInfo).then(user => console.log(user))}
+                  handleSignin(authInfo).then(() => history.push('/'))}
                 errorMessage={authErrorMessage}
               />
             )}
           />
+          <Route exact path="/" render={props => <Feed />} />
         </Switch>
       </div>
     );
