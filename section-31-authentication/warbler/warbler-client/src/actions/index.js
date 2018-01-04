@@ -41,3 +41,50 @@ export const signup = authInfo => (dispatch, getState) =>
   authRequest(authInfo, '/api/auth/signup').then(currentUser =>
     dispatch(authenticateUser(currentUser))
   );
+
+export const addMessage = message => ({
+  type: 'ADD_MESSAGE',
+  message
+});
+
+export const postNewMessage = text => (dispatch, getState) => {
+  let { currentUser } = getState(); //get current user from state
+  if (!currentUser) return Promise.resolve();
+
+  const { userId, token } = currentUser;
+  const url = `/api/users/${userId}/messages`;
+
+  fetch(url, {
+    method: 'post',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(text)
+  })
+    .then(resp => {
+      if (!resp.ok) {
+        if (resp.status >= 400 && resp.status < 500) {
+          return resp.json().then(data => {
+            let err = { authErrorMessage: data.message };
+            throw err;
+          });
+        } else {
+          let err = {
+            authErrorMessage: 'Please try again later. Server not responding.'
+          };
+          throw err;
+        }
+      }
+      return resp.json();
+    })
+    .then(m => {
+      let message = {
+        id: m._id,
+        createdAt: m.createdAt,
+        text: m.text,
+        username: m.userId.username,
+        profileImageUrl: m.userId.profileImageUrl
+      };
+      return dispatch(addMessage(message));
+    });
+};
