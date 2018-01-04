@@ -5,6 +5,7 @@ import * as actions from '../actions';
 import Signup from '../components/Signup';
 import Signin from '../components/Signin';
 import Feed from '../components/Feed';
+import MessageForm from '../components/MessageForm';
 
 class Main extends Component {
   render() {
@@ -41,6 +42,7 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" render={props => <Feed />} />
+          <Route exact path="/new-message" render={props => <MessageForm />} />
         </Switch>
       </div>
     );

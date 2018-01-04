@@ -43,7 +43,11 @@ class Signup extends Component {
           </label>
           <label>
             Image Url
-            <input type="text" name="image" onChange={this.handleChange} />
+            <input
+              type="text"
+              name="profileImageUrl"
+              onChange={this.handleChange}
+            />
           </label>
           <button type="submit">Sign up</button>
         </form>

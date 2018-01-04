@@ -8,12 +8,23 @@ const Navbar = props => {
       <div className="container-fluid">
         <div className="navbar-header">
           <div className="navbar-brand">
-            <span>Warbler</span>
+            <Link to="/">
+              <span>Warbler</span>
+            </Link>
           </div>
         </div>
         <ul className="nav navbar-nav navbar-right">
           {currentUser
             ? [
+                <li key="0">
+                  <img
+                    src={currentUser.profileImageUrl}
+                    alt="Profile"
+                    height="50"
+                    width="50"
+                    style={{ border: '1px solid black', marginRight: '10px' }}
+                  />
+                </li>,
                 <li key="1">
                   <Link to="/new-message">New Message</Link>
                 </li>,

@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import MessageList from './MessageList';
+import '../styles/Feed.css';
+
 class Feed extends Component {
   render() {
     const { currentUser } = this.props;
     console.log('Current User');
     console.log(currentUser);
     return (
-      <div>
-        <aside>img tag</aside>
-        <h1>Feed</h1>
+      <div id="feed-container">
+        <aside>
+          <img
+            src={currentUser.profileImageUrl}
+            alt="Profile"
+            height="300"
+            width="300"
+            style={{ border: '1px solid black' }}
+          />
+        </aside>
+        <div>
+          <MessageList />
+        </div>
       </div>
     );
   }

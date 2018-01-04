@@ -1,0 +1,19 @@
+#feed-container {
+  display: grid;
+  grid-template-columns: [line1] 300px [line2] 50px [line3] auto [end];
+  grid-template-rows: [first] 40px [line-top] 300px [line-bottom] 600px [end];
+}
+
+#feed-container aside {
+  grid-column-start: line1;
+  grid-column-end: line2;
+  grid-row-start: line-top;
+  grid-row-end: line-bottom;
+}
+
+#feed-container div {
+  grid-column-start: line3;
+  grid-column-end: end;
+  grid-row-start: line-top;
+  grid-row-end: end;
+}
