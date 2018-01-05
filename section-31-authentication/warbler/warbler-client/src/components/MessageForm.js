@@ -6,11 +6,13 @@ class MessageForm extends Component {
     this.state = { text: '' };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(e) {
-    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   }
   render() {
+    const { text } = this.state;
+    const { onSubmit } = this.props;
     return (
       <div className="msg-form">
         <textarea
@@ -20,8 +22,15 @@ class MessageForm extends Component {
           form="msgform"
           onChange={this.handleChange}
         />
-        <form id="msgform">
-          <button type="submit">Post my message!</button>
+        <form
+          id="msgform"
+          onSubmit={e => {
+            e.preventDefault();
+            onSubmit(text);
+            this.setState({ text: '' });
+          }}
+        >
+          <button type="submit">Post my Message!</button>
         </form>
       </div>
     );

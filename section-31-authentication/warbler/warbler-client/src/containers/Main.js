@@ -8,6 +8,18 @@ import Feed from '../components/Feed';
 import MessageForm from '../components/MessageForm';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.handleNewMessage = this.handleNewMessage.bind(this);
+  }
+
+  handleNewMessage(text) {
+    const { newMessage, history } = this.props;
+    newMessage(text).then(() => {
+      history.push('/');
+    });
+  }
+
   render() {
     const {
       // currentUser,
@@ -42,7 +54,11 @@ class Main extends Component {
             )}
           />
           <Route exact path="/" render={props => <Feed />} />
-          <Route exact path="/new-message" render={props => <MessageForm />} />
+          <Route
+            exact
+            path="/new-message"
+            render={props => <MessageForm onSubmit={this.handleNewMessage} />}
+          />
         </Switch>
       </div>
     );
@@ -51,6 +67,7 @@ class Main extends Component {
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
+  messages: state.messages,
   errorMessage: state.errorMessage
 });
 
@@ -60,6 +77,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   handleSignup(authData) {
     return dispatch(actions.signup(authData));
+  },
+  newMessage(text) {
+    return dispatch(actions.postNewMessage(text));
   }
 });
 

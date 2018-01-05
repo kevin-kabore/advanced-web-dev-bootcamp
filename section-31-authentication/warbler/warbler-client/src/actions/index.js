@@ -48,29 +48,31 @@ export const addMessage = message => ({
 });
 
 export const postNewMessage = text => (dispatch, getState) => {
-  let { currentUser } = getState(); //get current user from state
-  if (!currentUser) return Promise.resolve();
+  let { currentUser } = getState();
+  if (!currentUser) {
+    return Promise.resolve();
+  }
 
   const { userId, token } = currentUser;
   const url = `/api/users/${userId}/messages`;
-
-  fetch(url, {
+  return fetch(url, {
     method: 'post',
     headers: new Headers({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     }),
-    body: JSON.stringify(text)
+    body: JSON.stringify({ text })
   })
     .then(resp => {
       if (!resp.ok) {
         if (resp.status >= 400 && resp.status < 500) {
           return resp.json().then(data => {
-            let err = { authErrorMessage: data.message };
+            let err = { errorMessage: data.message };
             throw err;
           });
         } else {
           let err = {
-            authErrorMessage: 'Please try again later. Server not responding.'
+            errorMessage: 'Please try again later.  Server not responding.'
           };
           throw err;
         }
