@@ -5,22 +5,14 @@ import '../styles/Feed.css';
 
 class Feed extends Component {
   render() {
-    const { currentUser } = this.props;
-    console.log('Current User');
-    console.log(currentUser);
+    const { currentUser, messages } = this.props;
     return (
       <div id="feed-container">
         <aside>
-          <img
-            src={currentUser.profileImageUrl}
-            alt="Profile"
-            height="300"
-            width="300"
-            style={{ border: '1px solid black' }}
-          />
+          <img src={currentUser.profileImageUrl} alt="Profile" />
         </aside>
         <div>
-          <MessageList />
+          <MessageList messages={messages} />
         </div>
       </div>
     );

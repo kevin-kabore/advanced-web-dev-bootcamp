@@ -8,9 +8,7 @@ const Navbar = props => {
       <div className="container-fluid">
         <div className="navbar-header">
           <div className="navbar-brand">
-            <Link to="/">
-              <span>Warbler</span>
-            </Link>
+            {currentUser ? <Link to="/">Warbler</Link> : 'Warbler'}
           </div>
         </div>
         <ul className="nav navbar-nav navbar-right">
@@ -20,9 +18,15 @@ const Navbar = props => {
                   <img
                     src={currentUser.profileImageUrl}
                     alt="Profile"
-                    height="50"
-                    width="50"
-                    style={{ border: '1px solid black', marginRight: '10px' }}
+                    style={{
+                      border: '1px solid lightgrey',
+                      borderRadius: '5px',
+                      marginRight: '10px',
+                      height: 'auto',
+                      width: 'auto',
+                      maxWidth: '50px',
+                      maxHeight: '50px'
+                    }}
                   />
                 </li>,
                 <li key="1">

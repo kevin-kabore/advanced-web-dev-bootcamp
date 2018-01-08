@@ -12,7 +12,10 @@ class Main extends Component {
     super(props);
     this.handleNewMessage = this.handleNewMessage.bind(this);
   }
-
+  componentDidMount() {
+    const { loadMessages } = this.props;
+    loadMessages();
+  }
   handleNewMessage(text) {
     const { newMessage, history } = this.props;
     newMessage(text).then(() => {
@@ -22,12 +25,14 @@ class Main extends Component {
 
   render() {
     const {
-      // currentUser,
+      currentUser,
+      messages,
       authErrorMessage,
       handleSignin,
       handleSignup,
       history
     } = this.props;
+
     return (
       <div className="container">
         <Switch>
@@ -53,7 +58,14 @@ class Main extends Component {
               />
             )}
           />
-          <Route exact path="/" render={props => <Feed />} />
+
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <Feed {...props} currentUser={currentUser} messages={messages} />
+            )}
+          />
           <Route
             exact
             path="/new-message"
@@ -77,6 +89,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   handleSignup(authData) {
     return dispatch(actions.signup(authData));
+  },
+  loadMessages() {
+    return dispatch(actions.fetchMessages());
   },
   newMessage(text) {
     return dispatch(actions.postNewMessage(text));

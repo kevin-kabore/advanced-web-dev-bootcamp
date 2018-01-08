@@ -90,3 +90,24 @@ export const postNewMessage = text => (dispatch, getState) => {
       return dispatch(addMessage(message));
     });
 };
+
+export const loadMessages = messages => ({
+  type: 'LOAD_MESSAGES',
+  messages
+});
+
+export const fetchMessages = () => dispatch =>
+  fetch(`/api/messages`)
+    .then(data => data.json())
+    .then(m => {
+      let messages = m.map(m => {
+        return {
+          id: m._id,
+          createdAt: m.createdAt,
+          text: m.text,
+          username: m.userId.username,
+          profileImageUrl: m.userId.profileImageUrl
+        };
+      });
+      return dispatch(loadMessages(messages));
+    });
